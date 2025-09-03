@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#8c2f39" />
+  <meta name="description" content="OliTopDesign - Traditional Ethiopian Clothing Showroom" />
+  <title>OliTopDesign Showroom</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #8c2f39;
+      --secondary: #f2c94c;
+      --dark: #2d2817;
+      --light: #f5f5f5;
+      --accent: #33691e;
+      --bg: #f0f2f5;
+      --card: #ffffff;
+      --text: #2d2817;
+      --muted: #6c757d;
+      --shadow: 0 4px 10px rgba(0, 0, 0, .08);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0c0e12;
+      --card: #12151b;
+      --text: #e6e6e6;
+      --muted: #a3a9b3;
+      --shadow: 0 6px 18px rgba(0, 0, 0, .35);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: var(--primary);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://images.unsplash.com/photo-1586023492125-27a3c8d2e4c4?ixlib=rb-4.0.3') center/cover;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin-bottom: 2rem;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--primary);
+      font-size: 2.2rem;
+    }
+
+    .gallery-container {
+      max-width: 450px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Instagram-style horizontal scroll for multiple images */
+    .gallery-post {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 2.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-post:hover {
+      transform: translateY(-5px);
+    }
+
+    .post-header {
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .post-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    .post-date {
+      margin-left: auto;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Horizontal scroll container */
+    .post-images {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      cursor: pointer;
+    }
+
+    .post-images::-webkit-scrollbar {
+      display: none;
+      /* Chrome, Safari, Opera */
+    }
+
+    .post-image {
+      flex: 0 0 auto;
+      width: 100%;
+      scroll-snap-align: start;
+      position: relative;
+    }
+
+    .post-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .post-image:hover .image-nav {
+      opacity: 1;
+    }
+
+    .image-nav.prev {
+      left: 15px;
+    }
+
+    .image-nav.next {
+      right: 15px;
+    }
+
+    .image-counter {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .post-content {
+      padding: 1rem;
+    }
+
+    .post-description {
+      margin-bottom: 1rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    /* Single image post */
+    .single-image-post .post-image {
+      width: 100%;
+      cursor: pointer;
+      height: 100%;
+    }
+
+    /* Loading state */
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-left-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Image Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      overflow: auto;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      display: block;
+      max-width: 90%;
+      max-height: 70%;
+      margin: auto;
+      border-radius: 5px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+      animation: zoom 0.4s;
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0.8);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+      z-index: 1001;
+    }
+
+    .modal-close:hover {
+      color: var(--secondary);
+    }
+
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      color: white;
+      font-size: 1.5rem;
+      transition: background 0.3s;
+    }
+
+    .modal-nav:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .modal-nav.prev {
+      left: 30px;
+    }
+
+    .modal-nav.next {
+      right: 30px;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .footer-logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .footer h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.2s;
+    }
+
+    .social-links a:hover {
+      color: var(--secondary);
+    }
+
+    .copyright {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        padding: 1rem;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--card);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        box-shadow: var(--shadow);
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+
+      .nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .gallery-section {
+        padding: 2rem 1rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+      }
+
+      .post-image img {
+        height: 300px;
+      }
+
+      .modal-content {
+        max-width: 95%;
+        max-height: 85%;
+      }
+
+      .modal-close {
+        top: 15px;
+        right: 20px;
+        font-size: 30px;
+      }
+
+      .modal-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .modal-nav.prev {
+        left: 15px;
+      }
+
+      .modal-nav.next {
+        right: 15px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .post-header {
+        flex-wrap: wrap;
+      }
+
+      .post-date {
+        margin-left: 0;
+        width: 100%;
+        order: 3;
+      }
+
+      .post-image img {
+        height: 500px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="logo">
+      <img src="https://i.postimg.cc/T3wbf4wJ/photo-2025-03-15-08-51-38-removebg-preview.png" alt="OliTopDesign Logo" />
+      <span>OliTopDesign</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="nav" id="nav">
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Traditional Ethiopian Clothing</h1>
+    <p>Experience the beauty and elegance of authentic Habesha Kemis and traditional attire</p>
+    <a href="#gallery" class="btn primary">View Collection</a>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section" id="gallery">
+    <h2 class="section-title">Our Collection</h2>
+
+    <div class="gallery-container" id="galleryContainer">
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Loading beautiful traditional attire...</p>
+      </div>
+      <!-- Gallery items will be inserted here by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Image Modal -->
+  <div id="image-modal" class="modal">
+    <span class="modal-close">&times;</span>
+    <div class="modal-nav prev" id="modalPrev">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="modal-nav next" id="modalNext">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <img class="modal-content" id="modal-image">
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="footer-content">
+      <div>
+        <div class="footer-logo">
+          <img src="https://i.postimg.cc/T3wbf4wJ/photo-2025-03-15-08-51-38-removebg-preview.png"
+            alt="OliTopDesign Logo" />
+          <span>OliTopDesign</span>
+        </div>
+        <p>Preserving and showcasing the beauty of traditional Ethiopian clothing.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Contact Info</h3>
+        <ul class="footer-links">
+          <li><i class="fas fa-map-marker-alt"></i> Addis Ababa, Ethiopia</li>
+          <li><i class="fas fa-phone"></i> +251 123 456 789</li>
+          <li><i class="fas fa-envelope"></i> info@olitopdesign.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; 2023 OliTopDesign. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Initialize Supabase
+    const supabaseUrl = 'https://lkvfxpwngckmyfrmygkj.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxrdmZ4cHduZ2NrbXlmcm15Z2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMTIzMTYsImV4cCI6MjA3MTg4ODMxNn0.tbqJGNeDgnhv9Bgthzyi5yGhRc2_b_m_ulCDSnxngrU';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    // DOM Elements
+    const galleryContainer = document.getElementById('galleryContainer');
+    const loadingElement = document.getElementById('loading');
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    const themeToggle = document.getElementById('themeToggle');
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-image');
+    const modalClose = document.querySelector('.modal-close');
+    const modalPrev = document.getElementById('modalPrev');
+    const modalNext = document.getElementById('modalNext');
+
+    // Global variables for modal navigation
+    let currentModalImages = [];
+    let currentModalIndex = 0;
+
+    // Theme Management
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    // Set initial theme
+    setTheme(localStorage.getItem('theme') || 'light');
+
+    // Event Listeners
+    themeToggle.addEventListener('click', () => {
+      setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', (e) => {
+      if (nav.classList.contains('active') && !nav.contains(e.target) && e.target !== navToggle) {
+        nav.classList.remove('active');
+      }
+    });
+
+    // Modal functionality
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    modalPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (currentModalIndex > 0) {
+        currentModalIndex--;
+        modalImg.src = currentModalImages[currentModalIndex];
+      }
+    });
+
+    modalNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (currentModalIndex < currentModalImages.length - 1) {
+        currentModalIndex++;
+        modalImg.src = currentModalImages[currentModalIndex];
+      }
+    });
+
+    // Close modal when clicking outside the image
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Load gallery items from Supabase
+    async function loadGalleryItems() {
+      try {
+        const { data, error } = await supabase
+          .from('gallery')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          throw error;
+        }
+
+        // Group items by their title and description (assuming these are the same for multi-image posts)
+        const groupedItems = {};
+        data.forEach(item => {
+          // Use a combination of title and description as the grouping key
+          // If both are empty, we'll use the timestamp as a fallback
+          const key = `${item.title || ''}-${item.description || ''}` || item.created_at;
+
+          if (!groupedItems[key]) {
+            groupedItems[key] = [];
+          }
+          groupedItems[key].push(item);
+        });
+
+        // Clear loading state
+        loadingElement.style.display = 'none';
+
+        // Render gallery items
+        Object.values(groupedItems).forEach(group => {
+          // For groups with multiple images, create a horizontal scroll post
+          if (group.length > 1) {
+            createMultiImagePost(group);
+          } else {
+            // For single images, create a standard post
+            createSingleImagePost(group[0]);
+          }
+        });
+
+        // Initialize image navigation for multi-image posts
+        initImageNavigation();
+      } catch (error) {
+        console.error('Error loading gallery items:', error);
+        loadingElement.innerHTML = `
+          <p style="color: #d32f2f;">Error loading gallery. Please try again later.</p>
+        `;
+      }
+    }
+
+    // Create a post with multiple images (horizontal scroll)
+    function createMultiImagePost(items) {
+      const post = document.createElement('div');
+      post.className = 'gallery-post';
+
+      // Use the first item for metadata (assuming all items in group have same title/description)
+      const firstItem = items[0];
+      const postDate = new Date(firstItem.created_at).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      post.innerHTML = `
+        <div class="post-header">
+          <div class="post-title">${firstItem.title || 'Traditional Attire'}</div>
+          <div class="post-date">${postDate}</div>
+        </div>
+        <div class="post-images">
+          ${items.map((item, index) => `
+            <div class="post-image">
+              <img src="${item.image_url}" alt="${item.title || 'Traditional Ethiopian clothing'}" />
+              <div class="image-nav prev" style="display: ${index === 0 ? 'none' : 'flex'}">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <div class="image-nav next" style="display: ${index === items.length - 1 ? 'none' : 'flex'}">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+              <div class="image-counter">${index + 1} / ${items.length}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="post-content">
+          <p class="post-description">${firstItem.description || 'Beautiful traditional Ethiopian clothing collection.'}</p>
+        </div>
+      `;
+
+      // Add click event to open modal with all images
+      const imagesContainer = post.querySelector('.post-images');
+      imagesContainer.addEventListener('click', () => {
+        openModal(items.map(item => item.image_url), 0);
+      });
+
+      galleryContainer.appendChild(post);
+    }
+
+    // Create a post with a single image
+    function createSingleImagePost(item) {
+      const post = document.createElement('div');
+      post.className = 'gallery-post single-image-post';
+
+      const postDate = new Date(item.created_at).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      post.innerHTML = `
+        <div class="post-header">
+          <div class="post-title">${item.title || 'Traditional Attire'}</div>
+          <div class="post-date">${postDate}</div>
+        </div>
+        <div class="post-image">
+          <img src="${item.image_url}" alt="${item.title || 'Traditional Ethiopian clothing'}" />
+        </div>
+        <div class="post-content">
+          <p class="post-description">${item.description || 'Beautiful traditional Ethiopian clothing.'}</p>
+        </div>
+      `;
+
+      // Add click event to open modal
+      const image = post.querySelector('.post-image');
+      image.addEventListener('click', () => {
+        openModal([item.image_url], 0);
+      });
+
+      galleryContainer.appendChild(post);
+    }
+
+    // Open modal with full-size image
+    function openModal(images, startIndex) {
+      currentModalImages = images;
+      currentModalIndex = startIndex;
+      modalImg.src = images[startIndex];
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Show/hide navigation arrows based on current index
+      modalPrev.style.display = startIndex > 0 ? 'flex' : 'none';
+      modalNext.style.display = startIndex < images.length - 1 ? 'flex' : 'none';
+    }
+
+    // Initialize image navigation for multi-image posts
+    function initImageNavigation() {
+      const posts = document.querySelectorAll('.gallery-post:not(.single-image-post)');
+
+      posts.forEach(post => {
+        const imagesContainer = post.querySelector('.post-images');
+        const images = post.querySelectorAll('.post-image');
+        const prevButtons = post.querySelectorAll('.image-nav.prev');
+        const nextButtons = post.querySelectorAll('.image-nav.next');
+
+        let currentIndex = 0;
+
+        // Function to scroll to a specific image
+        function goToImage(index) {
+          if (index >= 0 && index < images.length) {
+            imagesContainer.scrollTo({
+              left: images[index].offsetLeft,
+              behavior: 'smooth'
+            });
+            currentIndex = index;
+
+            // Update navigation buttons visibility
+            prevButtons.forEach(btn => {
+              btn.style.display = index === 0 ? 'none' : 'flex';
+            });
+
+            nextButtons.forEach(btn => {
+              btn.style.display = index === images.length - 1 ? 'none' : 'flex';
+            });
+          }
+        }
+
+        // Add event listeners to navigation buttons
+        prevButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToImage(currentIndex - 1);
+          });
+        });
+
+        nextButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToImage(currentIndex + 1);
+          });
+        });
+
+        // Update current index on scroll
+        imagesContainer.addEventListener('scroll', () => {
+          const scrollPos = imagesContainer.scrollLeft;
+          const containerWidth = imagesContainer.offsetWidth;
+
+          currentIndex = Math.round(scrollPos / containerWidth);
+
+          // Update navigation buttons visibility
+          prevButtons.forEach(btn => {
+            btn.style.display = currentIndex === 0 ? 'none' : 'flex';
+          });
+
+          nextButtons.forEach(btn => {
+            btn.style.display = currentIndex === images.length - 1 ? 'none' : 'flex';
+          });
+        });
+      });
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', () => {
+      loadGalleryItems();
+    });
+  </script>
+</body>
+
+</html>
