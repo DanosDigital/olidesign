@@ -204,6 +204,23 @@
       margin-bottom: 2rem;
     }
 
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #6b1f28;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
     /* Gallery Section */
     .gallery-section {
       padding: 4rem 2rem;
@@ -686,7 +703,7 @@
   <section class="hero">
     <h1>Traditional Ethiopian Clothing</h1>
     <p>Experience the beauty and elegance of authentic Habesha Kemis and traditional attire</p>
-    <a href="#gallery" class="btn primary">View Collection</a>
+    <a href="#gallery" class="btn">View Collection</a>
   </section>
 
   <!-- Gallery Section -->
@@ -699,6 +716,30 @@
         <p>Loading beautiful traditional attire...</p>
       </div>
       <!-- Gallery items will be inserted here by JavaScript -->
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" style="padding: 4rem 2rem; background: var(--card);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h2 class="section-title">About OliTopDesign</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <div>
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Heritage</h3>
+          <p>OliTopDesign celebrates the rich cultural heritage of Ethiopia through traditional clothing. Each piece
+            tells a story of craftsmanship, tradition, and beauty that has been passed down through generations.</p>
+        </div>
+        <div>
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Mission</h3>
+          <p>We aim to preserve and promote Ethiopian cultural attire while adapting to contemporary fashion trends. Our
+            collections showcase the elegance and versatility of traditional Ethiopian clothing.</p>
+        </div>
+        <div>
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Craft</h3>
+          <p>Every garment is carefully crafted using traditional techniques combined with modern design sensibilities,
+            ensuring both authenticity and contemporary appeal.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -901,7 +942,7 @@
         // Render gallery items
         Object.values(groupedItems).forEach(group => {
           // For groups with multiple images, create a horizontal scroll post
-          if (group.length > 1) {
+          if (group.length > 1 || (group[0].multiple_images && group[0].multiple_images.length > 0)) {
             createMultiImagePost(group);
           } else {
             // For single images, create a standard post
@@ -932,22 +973,33 @@
         day: 'numeric'
       });
 
+      // Get all image URLs (main image + additional images)
+      let allImageUrls = [firstItem.image_url];
+
+      // Add multiple images if they exist
+      if (firstItem.multiple_images && firstItem.multiple_images.length > 0) {
+        allImageUrls = allImageUrls.concat(firstItem.multiple_images);
+      } else if (items.length > 1) {
+        // For backward compatibility with old grouped items
+        allImageUrls = items.map(item => item.image_url);
+      }
+
       post.innerHTML = `
         <div class="post-header">
           <div class="post-title">${firstItem.title || 'Traditional Attire'}</div>
           <div class="post-date">${postDate}</div>
         </div>
         <div class="post-images">
-          ${items.map((item, index) => `
+          ${allImageUrls.map((imageUrl, index) => `
             <div class="post-image">
-              <img src="${item.image_url}" alt="${item.title || 'Traditional Ethiopian clothing'}" />
+              <img src="${imageUrl}" alt="${firstItem.title || 'Traditional Ethiopian clothing'}" />
               <div class="image-nav prev" style="display: ${index === 0 ? 'none' : 'flex'}">
                 <i class="fas fa-chevron-left"></i>
               </div>
-              <div class="image-nav next" style="display: ${index === items.length - 1 ? 'none' : 'flex'}">
+              <div class="image-nav next" style="display: ${index === allImageUrls.length - 1 ? 'none' : 'flex'}">
                 <i class="fas fa-chevron-right"></i>
               </div>
-              <div class="image-counter">${index + 1} / ${items.length}</div>
+              <div class="image-counter">${index + 1} / ${allImageUrls.length}</div>
             </div>
           `).join('')}
         </div>
@@ -959,7 +1011,7 @@
       // Add click event to open modal with all images
       const imagesContainer = post.querySelector('.post-images');
       imagesContainer.addEventListener('click', () => {
-        openModal(items.map(item => item.image_url), 0);
+        openModal(allImageUrls, 0);
       });
 
       galleryContainer.appendChild(post);
