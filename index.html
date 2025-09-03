@@ -226,7 +226,7 @@
 
     /* Gallery Section */
     .gallery-section {
-      padding: 4rem 2rem;
+      padding: 1rem 1rem;
     }
 
     .section-title {
@@ -270,7 +270,7 @@
       border-radius: 16px;
       overflow: hidden;
       box-shadow: var(--shadow);
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.5rem;
       transition: transform 0.3s ease;
     }
 
@@ -329,7 +329,7 @@
 
     .post-image img {
       width: 100%;
-      height: auto;
+      height: 100%;
       /* Let image height adjust naturally */
       max-height: 500px;
       /* Limit height for large screens */
@@ -636,7 +636,10 @@
       }
 
       .post-image img {
-        height: 300px;
+        max-height: 385px;
+        /* Reduced from 500px */
+        aspect-ratio: 3/4;
+        /* Better aspect ratio for clothing images */
       }
 
       .modal-content {
@@ -681,7 +684,7 @@
       }
 
       .post-image img {
-        height: 500px;
+        max-height: 385px;
       }
 
       .sidebar {
@@ -693,6 +696,10 @@
       .sidebar.active {
         left: 0;
         /* Slide in to proper left position for mobile */
+      }
+
+      .gallery-post {
+        margin-bottom: 1.5rem;
       }
     }
 
