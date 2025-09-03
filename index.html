@@ -111,11 +111,12 @@
       cursor: pointer;
     }
 
-    /* Sidebar Menu */
+    /* Sidebar Menu - FIXED POSITIONING */
     .sidebar {
       position: fixed;
       top: 0;
       left: -280px;
+      /* Start off-screen */
       width: var(--sidebar-width);
       height: 100%;
       background: var(--card);
@@ -128,6 +129,7 @@
 
     .sidebar.active {
       left: 0;
+      /* Slide in to proper left position */
     }
 
     .sidebar-overlay {
@@ -180,7 +182,7 @@
 
     /* Hero Section */
     .hero {
-      min-height: 80vh;
+      min-height: 50vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -195,12 +197,12 @@
     .hero h1 {
       font-size: 3.5rem;
       margin-bottom: 1rem;
-      font-weight: 700;
+      font-weight: 500;
     }
 
     .hero p {
       font-size: 1.2rem;
-      max-width: 700px;
+      max-width: 500px;
       margin-bottom: 2rem;
     }
 
@@ -243,11 +245,11 @@
     }
 
     .gallery-container {
-      max-width: 450px;
+      max-width: 500px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      min-height: 300px;
+      min-height: 250px;
       position: relative;
       overflow: hidden;
     }
@@ -312,7 +314,7 @@
 
     .post-image img {
       width: 100%;
-      height: 400px;
+      height: 500px;
       object-fit: cover;
       display: block;
     }
@@ -365,6 +367,7 @@
       margin-bottom: 1rem;
       line-height: 1.5;
       color: var(--text);
+      font-size: 1rem;
     }
 
     /* Single image post */
@@ -425,7 +428,7 @@
       max-height: 70%;
       margin: auto;
       border-radius: 5px;
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+      box-shadow: 0 0 30px rgba(206, 176, 7, 0.2);
       animation: zoom 0.4s;
     }
 
@@ -656,7 +659,28 @@
       .sidebar {
         width: 85%;
         left: -85%;
+        /* Start off-screen for mobile */
       }
+
+      .sidebar.active {
+        left: 0;
+        /* Slide in to proper left position for mobile */
+      }
+    }
+
+    .header {
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .header-left .nav-toggle {
+      order: -1;
+      /* Move toggle before logo */
     }
   </style>
 </head>
@@ -666,38 +690,43 @@
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
   <aside class="sidebar" id="sidebar">
     <nav class="sidebar-nav">
-      <a href="#gallery">Gallery</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
       <div class="sidebar-theme-toggle">
         <span>Dark Mode</span>
         <button class="theme-toggle" id="sidebarThemeToggle">
           <i class="fas fa-moon"></i>
         </button>
       </div>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+
+
     </nav>
   </aside>
 
   <!-- Header -->
   <header class="header">
-    <a href="#" class="logo">
-      <img src="https://i.postimg.cc/T3wbf4wJ/photo-2025-03-15-08-51-38-removebg-preview.png" alt="OliTopDesign Logo" />
-      <span>OliTopDesign</span>
-    </a>
-
-    <button class="nav-toggle" id="navToggle">
-      <i class="fas fa-bars"></i>
-    </button>
+    <div class="header-left">
+      <a href="#" class="logo">
+        <img src="https://i.postimg.cc/T3wbf4wJ/photo-2025-03-15-08-51-38-removebg-preview.png"
+          alt="OliTopDesign Logo" />
+        <span>OliTopDesign</span>
+      </a>
+      <button class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
 
     <nav class="nav" id="nav">
-      <a href="#gallery">Gallery</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle">
         <i class="fas fa-moon"></i>
       </button>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
+
 
   <!-- Hero Section -->
   <section class="hero">
@@ -731,12 +760,14 @@
         </div>
         <div>
           <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Mission</h3>
-          <p>We aim to preserve and promote Ethiopian cultural attire while adapting to contemporary fashion trends. Our
+          <p>We aim to preserve and promote Ethiopian cultural attire while adapting to contemporary fashion trends.
+            Our
             collections showcase the elegance and versatility of traditional Ethiopian clothing.</p>
         </div>
         <div>
           <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Craft</h3>
-          <p>Every garment is carefully crafted using traditional techniques combined with modern design sensibilities,
+          <p>Every garment is carefully crafted using traditional techniques combined with modern design
+            sensibilities,
             ensuring both authenticity and contemporary appeal.</p>
         </div>
       </div>
@@ -768,8 +799,9 @@
         <div class="social-links">
           <a href="#"><i class="fab fa-facebook"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-pinterest"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
 
@@ -795,7 +827,9 @@
     </div>
 
     <div class="copyright">
-      <p>&copy; 2023 OliTopDesign. All rights reserved.</p>
+      <p>&copy; 2025 OliTopDesign. All rights reserved.</p>
+      <p>Designed by <a href="https://www.instagram.com/jordan_tadele?igsh=MWN5OXRxZDh3cDlscA=="
+          style="color: var(--secondary);">DanosDigital</a></p>
     </div>
   </footer>
 
@@ -805,6 +839,7 @@
     const supabaseUrl = 'https://lkvfxpwngckmyfrmygkj.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxrdmZ4cHduZ2NrbXlmcm15Z2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMTIzMTYsImV4cCI6MjA3MTg4ODMxNn0.tbqJGNeDgnhv9Bgthzyi5yGhRc2_b_m_ulCDSnxngrU';
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 
     // DOM Elements
     const galleryContainer = document.getElementById('galleryGrid');
@@ -923,30 +958,17 @@
           throw error;
         }
 
-        // Group items by their title and description (assuming these are the same for multi-image posts)
-        const groupedItems = {};
-        data.forEach(item => {
-          // Use a combination of title and description as the grouping key
-          // If both are empty, we'll use the timestamp as a fallback
-          const key = `${item.title || ''}-${item.description || ''}` || item.created_at;
-
-          if (!groupedItems[key]) {
-            groupedItems[key] = [];
-          }
-          groupedItems[key].push(item);
-        });
-
         // Clear loading state
         loadingElement.style.display = 'none';
 
         // Render gallery items
-        Object.values(groupedItems).forEach(group => {
-          // For groups with multiple images, create a horizontal scroll post
-          if (group.length > 1 || (group[0].multiple_images && group[0].multiple_images.length > 0)) {
-            createMultiImagePost(group);
+        data.forEach(item => {
+          // For items with multiple images, create a horizontal scroll post
+          if (item.multiple_images && item.multiple_images.length > 0) {
+            createMultiImagePost(item);
           } else {
             // For single images, create a standard post
-            createSingleImagePost(group[0]);
+            createSingleImagePost(item);
           }
         });
 
@@ -961,38 +983,28 @@
     }
 
     // Create a post with multiple images (horizontal scroll)
-    function createMultiImagePost(items) {
+    function createMultiImagePost(item) {
       const post = document.createElement('div');
       post.className = 'gallery-post';
 
-      // Use the first item for metadata (assuming all items in group have same title/description)
-      const firstItem = items[0];
-      const postDate = new Date(firstItem.created_at).toLocaleDateString('en-US', {
+      const postDate = new Date(item.created_at).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
       });
 
       // Get all image URLs (main image + additional images)
-      let allImageUrls = [firstItem.image_url];
-
-      // Add multiple images if they exist
-      if (firstItem.multiple_images && firstItem.multiple_images.length > 0) {
-        allImageUrls = allImageUrls.concat(firstItem.multiple_images);
-      } else if (items.length > 1) {
-        // For backward compatibility with old grouped items
-        allImageUrls = items.map(item => item.image_url);
-      }
+      const allImageUrls = [item.image_url, ...item.multiple_images];
 
       post.innerHTML = `
         <div class="post-header">
-          <div class="post-title">${firstItem.title || 'Traditional Attire'}</div>
+          <div class="post-title">${item.title || 'Traditional Attire'}</div>
           <div class="post-date">${postDate}</div>
         </div>
         <div class="post-images">
           ${allImageUrls.map((imageUrl, index) => `
             <div class="post-image">
-              <img src="${imageUrl}" alt="${firstItem.title || 'Traditional Ethiopian clothing'}" />
+              <img src="${imageUrl}" alt="${item.title || 'Traditional Ethiopian clothing'}" />
               <div class="image-nav prev" style="display: ${index === 0 ? 'none' : 'flex'}">
                 <i class="fas fa-chevron-left"></i>
               </div>
@@ -1004,7 +1016,7 @@
           `).join('')}
         </div>
         <div class="post-content">
-          <p class="post-description">${firstItem.description || 'Beautiful traditional Ethiopian clothing collection.'}</p>
+          ${item.description ? `<p class="post-description">${item.description}</p>` : ''}
         </div>
       `;
 
@@ -1037,7 +1049,7 @@
           <img src="${item.image_url}" alt="${item.title || 'Traditional Ethiopian clothing'}" />
         </div>
         <div class="post-content">
-          <p class="post-description">${item.description || 'Beautiful traditional Ethiopian clothing.'}</p>
+          ${item.description ? `<p class="post-description">${item.description}</p>` : ''}
         </div>
       `;
 
