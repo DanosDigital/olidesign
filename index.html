@@ -56,7 +56,7 @@
       z-index: 100;
       background: var(--card);
       box-shadow: var(--shadow);
-      padding: 1rem 2rem;
+      padding: 0.75rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -65,15 +65,37 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      font-weight: 700;
+      gap: 1rem;
+      /* increased spacing for clarity */
+      font-weight: 800;
+      /* bolder text */
       color: var(--primary);
       text-decoration: none;
+      font-size: 1.25rem;
+      /* slightly larger text */
+      line-height: 1.2;
+      white-space: nowrap;
+      /* prevents text wrap */
     }
 
     .logo img {
-      height: 32px;
+      background: rgb(230, 227, 227);
+      height: 65px;
+      /* slightly larger for detail */
       width: auto;
+      object-fit: contain;
+      /* keeps proportions */
+      image-rendering: -webkit-optimize-contrast;
+      /* improves sharpness */
+      image-rendering: crisp-edges;
+      border-radius: 10px;
+      /* optional: soft edges for polish */
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .logo img:hover {
+      transform: scale(1.05);
+      /* subtle zoom on hover */
     }
 
     .nav-toggle {
@@ -377,14 +399,19 @@
 
     .image-counter {
       position: absolute;
-      bottom: 15px;
-      right: 15px;
+      bottom: 25px;
+      right: 25px;
       background: rgba(0, 0, 0, 0.6);
       color: white;
       padding: 0.25rem 0.75rem;
       border-radius: 20px;
       font-size: 0.85rem;
+      z-index: 5;
+    }
 
+    /* Hover / animation effect */
+    .image-counter:hover {
+      transform: scale(1.05);
     }
 
     .post-content {
@@ -543,7 +570,7 @@
     }
 
     .footer-logo img {
-      height: 32px;
+      height: 50px;
       width: auto;
     }
 
@@ -666,6 +693,17 @@
       .modal-nav.next {
         right: 15px;
       }
+
+      .logo img {
+        height: 45px;
+        /* smaller for mobile */
+      }
+
+      .logo {
+        font-size: 1rem;
+        /* adjust text for mobile */
+        gap: 0.5rem;
+      }
     }
 
     @media (max-width: 576px) {
@@ -745,7 +783,7 @@
       <a href="#" class="logo">
         <img src="https://i.postimg.cc/T3wbf4wJ/photo-2025-03-15-08-51-38-removebg-preview.png"
           alt="OliTopDesign Logo" />
-        <span>OliTopDesign</span>
+
       </a>
       <button class="nav-toggle" id="navToggle">
         <i class="fas fa-bars"></i>
@@ -765,7 +803,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <h1>Traditional Ethiopian Clothing</h1>
+    <h1>Oli TopDesign</h1>
     <p>Experience the beauty and elegance of authentic Habesha Kemis and traditional attire</p>
     <a href="#gallery" class="btn">View Collection</a>
   </section>
@@ -790,20 +828,18 @@
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
         <div>
           <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Heritage</h3>
-          <p>OliTopDesign celebrates the rich cultural heritage of Ethiopia through traditional clothing. Each piece
-            tells a story of craftsmanship, tradition, and beauty that has been passed down through generations.</p>
+          <p>OliTopDesign የኢትዮጵያን የበለፀጉ ባህላዊ ቅርሶች በባህላዊ አልባሳት ያከብራል። እያንዳንዱ ክፍል በትውልዶች ውስጥ የተላለፈውን የእጅ ጥበብ ፣ ወግ እና ውበት
+            ይተርካል።</p>
         </div>
         <div>
           <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Mission</h3>
-          <p>We aim to preserve and promote Ethiopian cultural attire while adapting to contemporary fashion trends.
-            Our
-            collections showcase the elegance and versatility of traditional Ethiopian clothing.</p>
+          <p>ከወቅታዊ የፋሽን አዝማሚያዎች ጋር እየተላመድን የኢትዮጵያን የባህል አልባሳት ለመጠበቅ እና ለማስተዋወቅ አላማችን ነው። ስብስቦቻችን የኢትዮጵያን የባህል አልባሳት ውበት
+            እና ሁለገብነት ያሳያሉ</p>
         </div>
         <div>
           <h3 style="color: var(--primary); margin-bottom: 1rem;">Our Craft</h3>
-          <p>Every garment is carefully crafted using traditional techniques combined with modern design
-            sensibilities,
-            ensuring both authenticity and contemporary appeal.</p>
+          <p>እያንዳንዱ ልብስ ከዘመናዊ ዲዛይን ጋር የተጣመረ ባህላዊ ቴክኒኮችን በመጠቀም በጥንቃቄ ይሠራል
+            ስሜታዊነት ፣ሁለቱንም ትክክለኛነት እና ወቅታዊ ይግባኝ ማረጋገጥ.</p>
         </div>
       </div>
     </div>
@@ -832,9 +868,9 @@
         </div>
         <p>Preserving and showcasing the beauty of traditional Ethiopian clothing.</p>
         <div class="social-links">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.facebook.com/share/p/18PzLTbgas/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/p/DGjELagowX5/?igsh=NGkwNXhpMWV0bmdz"><i class="fab fa-instagram"></i></a>
+          <a href="https://t.me/olitopdesign1"><i class="fab fa-telegram"></i></a>
           <a href="#"><i class="fab fa-tiktok"></i></a>
           <a href="#"><i class="fab fa-whatsapp"></i></a>
         </div>
@@ -855,7 +891,8 @@
         <h3>Contact Info</h3>
         <ul class="footer-links">
           <li><i class="fas fa-map-marker-alt"></i> Addis Ababa, Ethiopia</li>
-          <li><i class="fas fa-phone"></i> +251 123 456 789</li>
+          <li><i class="fas fa-phone"></i> <a href="tel:+251910104887">+251910104887</a> & <a
+              href="tel:+251941774141">+251941774141</a></li>
           <li><i class="fas fa-envelope"></i> info@olitopdesign.com</li>
         </ul>
       </div>
@@ -954,6 +991,7 @@
       if (currentModalIndex > 0) {
         currentModalIndex--;
         modalImg.src = currentModalImages[currentModalIndex];
+        updateModalNav();
       }
     });
 
@@ -962,8 +1000,14 @@
       if (currentModalIndex < currentModalImages.length - 1) {
         currentModalIndex++;
         modalImg.src = currentModalImages[currentModalIndex];
+        updateModalNav();
       }
     });
+
+    function updateModalNav() {
+      modalPrev.style.display = currentModalIndex > 0 ? 'flex' : 'none';
+      modalNext.style.display = currentModalIndex < currentModalImages.length - 1 ? 'flex' : 'none';
+    }
 
     // Close modal when clicking outside the image
     window.addEventListener('click', (e) => {
@@ -1034,7 +1078,7 @@
       post.innerHTML = `
         <div class="post-header">
           <div class="post-title">${item.title || 'Traditional Attire'}</div>
-          <div class="post-date">${postDate}</div>
+          <div class="post-date"></div>
         </div>
         <div class="post-images">
           ${allImageUrls.map((imageUrl, index) => `
@@ -1078,7 +1122,7 @@
       post.innerHTML = `
         <div class="post-header">
           <div class="post-title">${item.title || 'Traditional Attire'}</div>
-          <div class="post-date">${postDate}</div>
+          <div class="post-date"></div>
         </div>
         <div class="post-image">
           <img src="${item.image_url}" alt="${item.title || 'Traditional Ethiopian clothing'}" />
@@ -1105,9 +1149,14 @@
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
 
-      // Show/hide navigation arrows based on current index
-      modalPrev.style.display = startIndex > 0 ? 'flex' : 'none';
-      modalNext.style.display = startIndex < images.length - 1 ? 'flex' : 'none';
+      // Hide prev/next buttons if only one image
+      if (images.length <= 1) {
+        modalPrev.style.display = 'none';
+        modalNext.style.display = 'none';
+      } else {
+        modalPrev.style.display = currentModalIndex === 0 ? 'none' : 'flex';
+        modalNext.style.display = currentModalIndex === images.length - 1 ? 'none' : 'flex';
+      }
     }
 
     // Initialize image navigation for multi-image posts
@@ -1122,6 +1171,11 @@
 
         let currentIndex = 0;
 
+        // Function to update counter
+        function updateCounter() {
+          counter.textContent = `${currentIndex + 1} / ${images.length}`;
+        }
+
         // Function to scroll to a specific image
         function goToImage(index) {
           if (index >= 0 && index < images.length) {
@@ -1130,6 +1184,7 @@
               behavior: 'smooth'
             });
             currentIndex = index;
+            updateCounter();
 
             // Update navigation buttons visibility
             prevButtons.forEach(btn => {
@@ -1143,38 +1198,67 @@
         }
 
         // Add event listeners to navigation buttons
-        prevButtons.forEach(btn => {
+        prevButtons.forEach((btn, index) => {
           btn.addEventListener('click', (e) => {
             e.stopPropagation();
             goToImage(currentIndex - 1);
           });
         });
 
-        nextButtons.forEach(btn => {
+        nextButtons.forEach((btn, index) => {
           btn.addEventListener('click', (e) => {
             e.stopPropagation();
             goToImage(currentIndex + 1);
           });
         });
 
-        // Update current index on scroll
+        // Update scroll position when user manually scrolls
         imagesContainer.addEventListener('scroll', () => {
           const scrollPos = imagesContainer.scrollLeft;
-          const containerWidth = imagesContainer.offsetWidth;
+          const containerWidth = imagesContainer.clientWidth;
 
-          currentIndex = Math.round(scrollPos / containerWidth);
+          // Find which image is currently in view
+          let newIndex = 0;
+          let minDistance = Infinity;
 
-          // Update navigation buttons visibility
-          prevButtons.forEach(btn => {
-            btn.style.display = currentIndex === 0 ? 'none' : 'flex';
+          images.forEach((image, index) => {
+            const distance = Math.abs(scrollPos - image.offsetLeft);
+            if (distance < minDistance) {
+              minDistance = distance;
+              newIndex = index;
+            }
           });
 
-          nextButtons.forEach(btn => {
-            btn.style.display = currentIndex === images.length - 1 ? 'none' : 'flex';
-          });
+          if (newIndex !== currentIndex) {
+            currentIndex = newIndex;
+            updateCounter();
+
+            // Update navigation buttons visibility
+            prevButtons.forEach(btn => {
+              btn.style.display = currentIndex === 0 ? 'none' : 'flex';
+            });
+
+            nextButtons.forEach(btn => {
+              btn.style.display = currentIndex === images.length - 1 ? 'none' : 'flex';
+            });
+          }
         });
+
+        // Initialize counter
+        updateCounter();
       });
     }
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+    );
 
     // Initialize the page
     document.addEventListener('DOMContentLoaded', () => {
